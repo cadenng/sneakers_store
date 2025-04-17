@@ -6,6 +6,7 @@ const products = [
     id: 1,
     title: "Air Force",
     price: 19,
+    description: "The Air Force 1 was created by designer Bruce Kilgore and was the first basketball shoe to use the Nike Air technology.",
     colors: [
       {
         code: "black",
@@ -21,6 +22,7 @@ const products = [
     id: 2,
     title: "Air Jordan",
     price: 239,
+    description: "The Air Jordan line is a collection of basketball shoes and athletic wear produced by Nike for NBA legend Michael Jordan.",
     colors: [
       {
         code: "lightgray",
@@ -36,6 +38,7 @@ const products = [
     id: 3,
     title: "Blazer",
     price: 919,
+    description: "The Blazer combines vintage basketball style with modern comfort, making it a stylish yet functional sneaker.",
     colors: [
       {
         code: "lightgray",
@@ -51,6 +54,7 @@ const products = [
     id: 4,
     title: "Crater",
     price: 9,
+    description: "The Crater series is known for its environmentally friendly materials, giving you comfort with a reduced carbon footprint.",
     colors: [
       {
         code: "black",
@@ -66,6 +70,7 @@ const products = [
     id: 5,
     title: "Hippie",
     price: 1009,
+    description: "A bold and unconventional style, the Hippie sneakers are made for those who want to make a statement with their footwear.",
     colors: [
       {
         code: "gray",
@@ -81,6 +86,7 @@ const products = [
     id: 6,
     title: "SKIBDI",
     price: 229,
+    description: "Designed for urban adventurers, the SKIBDI offers both durability and flair for those who embrace an active lifestyle.",
     colors: [
       {
         code: "black",
@@ -99,23 +105,25 @@ let choosenProduct = products[0];
 const currentProductImg = document.querySelector(".productImg");
 const currentProductTitle = document.querySelector(".productTitle");
 const currentProductPrice = document.querySelector(".productPrice");
+const currentProductDescription = document.querySelector(".productDesc"); // added description element
 const currentProductColors = document.querySelectorAll(".color");
 const currentProductSizes = document.querySelectorAll(".size");
 
 menuItems.forEach((item, index) => {
   item.addEventListener("click", () => {
-    // change the current slide ✅ FIXED: missing backtick and closing parenthesis
+    // Change the current slide
     wrapper.style.transform = `translateX(${-100 * index}vw)`;
 
-    // change the choosen product
+    // Change the chosen product
     choosenProduct = products[index];
 
-    // change texts of currentProduct
+    // Change the product title, price, and description
     currentProductTitle.textContent = choosenProduct.title;
     currentProductPrice.textContent = "RM" + choosenProduct.price;
+    currentProductDescription.textContent = choosenProduct.description; // dynamically update description
     currentProductImg.src = choosenProduct.colors[0].img;
 
-    // assign new colors ✅ FIXED: added safety check for color index
+    // Assign new colors
     currentProductColors.forEach((color, index) => {
       if (choosenProduct.colors[index]) {
         color.style.backgroundColor = choosenProduct.colors[index].code;
@@ -129,7 +137,6 @@ menuItems.forEach((item, index) => {
 
 currentProductColors.forEach((color, index) => {
   color.addEventListener("click", () => {
-    // ✅ FIXED: added safety check to avoid errors
     if (choosenProduct.colors[index]) {
       currentProductImg.src = choosenProduct.colors[index].img;
     }
@@ -151,7 +158,6 @@ const productButton = document.querySelector(".productButton");
 const payment = document.querySelector(".payment");
 const close = document.querySelector(".close");
 
-// ✅ FIXED: added safety check to avoid null errors
 if (productButton && payment) {
   productButton.addEventListener("click", () => {
     payment.style.display = "flex";
